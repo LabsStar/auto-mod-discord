@@ -1,5 +1,4 @@
 const { Client } = require("discord.js");
-const token = "MTA5MTM0MTA3MDM3MTE0Mzc1Mg.G89wj4.NXcsYWN-inH2gYP_0s8_Gi5xmvM_WHmOuI8BWs";
 const { AutoMod } = require("../src/app");
 
 
@@ -25,4 +24,4 @@ client.on("messageCreate", async (message) => {
 });
 
 
-client.login(token);
+client.login("TOKEN");
