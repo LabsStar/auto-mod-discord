@@ -2,7 +2,6 @@
   "name": "@hyperstarcloud/auto-mod",
   "version": "1.0.1",
   "description": "Just a Basic AutoMod Package",
-  "access": "public",
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
