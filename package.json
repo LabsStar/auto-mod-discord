@@ -1,6 +1,6 @@
 {
   "name": "auto-mod-discord",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Just a Basic AutoMod Package",
   "main": "src/app.js",
   "scripts": {
