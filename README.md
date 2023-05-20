@@ -49,8 +49,10 @@ All examples are in the [examples](https://github.com/LabsStar/auto-mod-discord/
 
 ## Roadmap
 
+- Server Backup
+- User Reputation
 - ~~Add AntiSpam~~
-- Add Analytics (Might be a separate method)
+- ~~Add Analytics (Might be a separate method)~~
 
 ## Contributing
 

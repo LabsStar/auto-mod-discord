@@ -2,6 +2,11 @@ const { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment } = req
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const Analytics = require('./Analytics');
+const analytics = new Analytics();
+const checkForDep = require('../utils/checkForDep');
+
+let Spam = new Set();
 
 
 const AutoModImage = () => {
@@ -10,7 +15,7 @@ const AutoModImage = () => {
 };
 
 // Helper function to check for package updates
-const checkInCase = (checkForDep) => {
+const checkInCase = () => {
   if (checkForDep === "No update available!") return;
   else if (checkForDep === "Update available!") {
     // Emit a warning if there is a new version of the package
@@ -26,6 +31,8 @@ class AntiSpam {
   // Method to check for spam
   async check(message, options) {
     if (!this.client) throw new Error('You must provide a client!');
+
+    checkInCase();
 
     // Function to check if the user is exempt from spam checks based on roles
     function checkIfBypass() {
@@ -78,12 +85,20 @@ class AntiSpam {
           .setTitle('AutoMod - Anti Spam')
           .setDescription(`**User:** <@${message.author.id}> (${message.author.id})\n**Action:** Warn\n**Reason:** Spamming Emojis\n**Message:** \`\`\`${message.content}\`\`\``)
           .setImage('attachment://imrs.jpg')
+          .setFooter({
+            text: `AutoMod By: www.hyperstar.cloud`,
+            iconURL: 'https://avatars.githubusercontent.com/u/133303718?s=200&v=4',
+          })
           .setTimestamp();
 
         const channel = message.guild.channels.cache.get(modLogChannel);
 
         if (!channel) throw new Error('Invalid ModLog Channel Provided!');
         else channel.send({ embeds: [embed], components: [row], files: [AutoModImage()] });
+        analytics.set("spam", "blocked", analytics.get("spam", "blocked").value + 1);
+        analytics.set("spam", "total", analytics.get("spam", "total").value + 1);
+        analytics.set("spam", "emojis", analytics.get("spam", "emojis").value + 1);
+        analytics.set("spam", "messages", [...analytics.get("spam", "messages").value, message.content]);
       }
     }
 
@@ -104,8 +119,14 @@ class AntiSpam {
 
         if (!channel) throw new Error('Invalid ModLog Channel Provided!');
         else channel.send({ embeds: [embed], components: [row], files: [AutoModImage()] });
+        analytics.set("spam", "blocked", analytics.get("spam", "blocked").value + 1);
+        analytics.set("spam", "total", analytics.get("spam", "total").value + 1);
+        analytics.set("spam", "text", analytics.get("spam", "text").value + 1);
+        analytics.set("spam", "messages", [...analytics.get("spam", "messages").value, message.content]);
       }
     }
+
+
   };
 }
 

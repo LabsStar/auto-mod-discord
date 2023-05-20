@@ -2,6 +2,9 @@ const { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment } = req
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const Analytics = require('./Analytics');
+const analytics = new Analytics();
+const checkForDep = require('../utils/checkForDep');
 
 // Helper function to check for package updates
 const checkInCase = () => {
@@ -13,8 +16,8 @@ const checkInCase = () => {
 };
 
 const AutoModImage = () => {
-    const attachment = new MessageAttachment(path.join(__dirname, '../data/images/imrs.jpg'), 'imrs.jpg');
-    return attachment;
+  const attachment = new MessageAttachment(path.join(__dirname, '../data/images/imrs.jpg'), 'imrs.jpg');
+  return attachment;
 };
 
 class LinkChecker {
@@ -75,7 +78,10 @@ class LinkChecker {
       }
 
       // Skip checking if the user has a bypass role or the link is whitelisted
-      if (checkIfBypass() || checkIfWhitelisted()) return;
+      if (checkIfBypass() || checkIfWhitelisted()) {
+        analytics.set("links", "whitelisted", analytics.get("links", "whitelisted").value + 1);
+        analytics.set("links", "total", analytics.get("links", "total").value + 1);
+      }
 
       // Create an embed to display information about the link
       const embed = new MessageEmbed()
@@ -83,6 +89,10 @@ class LinkChecker {
         .setDescription(`**Message:** ${message.content}\n**Channel:** ${message.channel}\n**Author:** ${message.author}`)
         .setColor('RED')
         .setImage('attachment://imrs.jpg')
+        .setFooter({
+          text: `AutoMod By: www.hyperstar.cloud`,
+          iconURL: 'https://avatars.githubusercontent.com/u/133303718?s=200&v=4',
+        })
         .setAuthor({
           name: message.author.tag,
           iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -106,6 +116,10 @@ class LinkChecker {
 
         modChannel.send({ embeds: [embed], components: [row], files: [AutoModImage()] });
       }
+
+      analytics.set("links", "total", analytics.get("links", "total").value + 1);
+      analytics.set("links", "blocked", analytics.get("links", "blocked").value + 1);
+      analytics.set("links", "links", [...analytics.get("links", "links").value, message.content]);
     }
   };
 }

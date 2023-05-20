@@ -3,6 +3,8 @@ const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 const checkForDep = require('../utils/checkForDep');
+const Analytics = require('./Analytics');
+const analytics = new Analytics();
 
 // Read and split the list of naughty words from a file
 const naughtyWords = fs.readFileSync(path.join(__dirname, '..', 'naughty-words.txt'), 'utf-8').split('\r\n');
@@ -17,8 +19,8 @@ const checkInCase = () => {
 };
 
 const AutoModImage = () => {
-    const attachment = new MessageAttachment(path.join(__dirname, '../data/images/imrs.jpg'), 'imrs.jpg');
-    return attachment;
+  const attachment = new MessageAttachment(path.join(__dirname, '../data/images/imrs.jpg'), 'imrs.jpg');
+  return attachment;
 };
 
 class AutoMod {
@@ -40,8 +42,17 @@ class AutoMod {
     // Create a regular expression from the list of naughty words
     const messageRegex = new RegExp(naughtyWords.join('|'), 'gi');
 
-    // Check if the message contains a naughty word
-    if (messageRegex.test(message.content.toLowerCase())) {
+    // Check if the message contains a naughty word but if it is like "Analytics" or "Analyst" where it contains a naughty word but is not a naughty word itself
+
+    const checkWord = (word) => {
+      if (word.toLowerCase().match(messageRegex)) {
+        if (naughtyWords.includes(word.toLowerCase())) return true;
+        else return false;
+      }
+      else return false;
+    };
+    
+    if (checkWord(message.content)) {
 
       // Delete the message if specified in options
       if (options?.deleteMessage) message.delete();
@@ -140,6 +151,10 @@ class AutoMod {
           }
         });
       }
+
+      analytics.set("word_filter", "total", analytics.get("word_filter", "total").value + 1);
+      analytics.set("word_filter", "blocked", analytics.get("word_filter", "blocked").value + 1);
+      analytics.set("word_filter", "messages", [...analytics.get("word_filter", "messages").value, message.content]);
     }
     else {
       return;

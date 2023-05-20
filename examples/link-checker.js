@@ -7,17 +7,19 @@ const client = new Client({
 });
 
 const linkChecker = new LinkChecker(client);
-
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on("messageCreate", async (message) => {
+    
     linkChecker.check(message, {
         bypassRoles: [],
         modChannel: "1020761875979452457",
         whitelistLinks: ["https://discord.gg/m23dww9j"],
     });
+    
+    
 });
 
 
