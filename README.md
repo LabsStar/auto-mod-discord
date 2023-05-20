@@ -19,7 +19,7 @@ npm install auto-mod-discord
 
 ```javascript
 const { Client } = require("discord.js"); // Import discord.js
-const { AutoMod, LinkChecker } = require("auto-mod-discord"); // Import the package
+const { AutoMod, LinkChecker, AntiSpam } = require("auto-mod-discord"); // Import the package
 
 
 const client = new Client({
@@ -28,6 +28,7 @@ const client = new Client({
 
 const autoMod = new AutoMod(client); // Default settings
 const linkChecker = new LinkChecker(client); // Default settings
+const antiSpam = new AntiSpam(client); // Default settings
 ```
 
 ## Dependencies
@@ -44,10 +45,11 @@ All examples are in the [examples](https://github.com/LabsStar/auto-mod-discord/
 
 - AutoMod
 - LinkChecker
+- AntiSpam
 
 ## Roadmap
 
-- Add AntiSpam
+- ~~Add AntiSpam~~
 - Add Analytics (Might be a separate method)
 
 ## Contributing
