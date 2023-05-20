@@ -1,6 +1,6 @@
 {
   "name": "@hyperstarcloud/auto-mod",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Just a Basic AutoMod Package",
   "main": "src/app.js",
   "scripts": {

@@ -3,6 +3,14 @@ const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 
+const checkInCase = () => {
+    if (checkForDep === "No update available!") return;
+    else if (checkForDep === "Update available!") {
+        // Emit a deprecation warning
+        process.emitWarning('There is a New Version of this package (@hyperstarcloud/auto-mod)', 'DeprecationWarning');
+    }
+};
+
 class LinkChecker {
     constructor(client) {
         this.client = client;
@@ -10,6 +18,8 @@ class LinkChecker {
 
     async check(message, options) {
         if (!this.client) throw new Error('You must provide a client!');
+
+        checkInCase();
 
         if (message.author.bot) return;
         if (message.channel.type === 'DM') return;

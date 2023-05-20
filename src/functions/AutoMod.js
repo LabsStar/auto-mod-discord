@@ -2,8 +2,17 @@ const { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment } = req
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const checkForDep = require('../utils/checkForDep');
 
 const naughtyWords = fs.readFileSync(path.join(__dirname, '..', 'naughty-words.txt'), 'utf-8').split('\r\n');
+
+const checkInCase = () => {
+    if (checkForDep === "No update available!") return;
+    else if (checkForDep === "Update available!") {
+        // Emit a deprecation warning
+        process.emitWarning('There is a New Version of this package (@hyperstarcloud/auto-mod)', 'DeprecationWarning');
+    }
+};
 
 class AutoMod {
     constructor(client) {
@@ -12,6 +21,8 @@ class AutoMod {
 
     async check(message, options) {
         if (!this.client) throw new Error('You must provide a client!');
+
+        checkInCase();
 
         if (message.author.bot) return;
         if (message.channel.type === 'DM') return;
