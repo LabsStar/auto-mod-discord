@@ -25,4 +25,4 @@ client.on("messageCreate", async (message) => {
 
 
 
-client.login("MTA5MTM0MTA3MDM3MTE0Mzc1Mg.GWlTjB.d8B7GHtJk1Sk_VNeEbRz1jgNHJn1ljrkbJAiF0");
+client.login("TOKEN");
