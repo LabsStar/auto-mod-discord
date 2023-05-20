@@ -1,0 +1,30 @@
+{
+  "name": "@hyperstarcloud/auto-mod",
+  "version": "1.0.0",
+  "description": "Just a Basic AutoMod Package",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LabsStar/auto-mod-discord.git"
+  },
+  "keywords": [
+    "discord",
+    "discordjs",
+    "mod",
+    "moderation",
+    "auto-mod"
+  ],
+  "author": "0xhylia",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/LabsStar/auto-mod-discord/issues"
+  },
+  "homepage": "https://github.com/LabsStar/auto-mod-discord#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "discord.js": "^13.10.3"
+  }
+}
