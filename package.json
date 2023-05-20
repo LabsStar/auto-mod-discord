@@ -1,5 +1,5 @@
 {
-  "name": "@hyperstarcloud/auto-mod",
+  "name": "auto-mod-discord",
   "version": "1.0.1",
   "description": "Just a Basic AutoMod Package",
   "main": "src/app.js",

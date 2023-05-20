@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/%40hyperstarcloud%2Fauto-mod.svg)](https://badge.fury.io/js/%40hyperstarcloud%2Fauto-mod)
 [![GitHub license](https://img.shields.io/github/license/hyperstarcloud/auto-mod)](https://github.com/hyperstarcloud/auto-mod/blob/main/LICENSE)
 
-# @hyperstarcloud/auto-mod
+# auto-mod-discord
 
 A Node.js package for automoderation in Discord servers.
 
@@ -10,14 +10,14 @@ A Node.js package for automoderation in Discord servers.
 Install the package using npm:
 
 ```shell
-npm install @hyperstarcloud/auto-mod
+npm install auto-mod-discord
 ```
 
 ## Usage
 
 ```javascript
 const { Client } = require("discord.js"); // Import discord.js
-const { AutoMod, LinkChecker } = require("@hyperstarcloud/auto-mod"); // Import the package
+const { AutoMod, LinkChecker } = require("auto-mod-discord"); // Import the package
 
 
 const client = new Client({
