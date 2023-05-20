@@ -1,5 +1,6 @@
-[![npm version](https://badge.fury.io/js/%40hyperstarcloud%2Fauto-mod.svg)](https://badge.fury.io/js/%40hyperstarcloud%2Fauto-mod)
-[![GitHub license](https://img.shields.io/github/license/hyperstarcloud/auto-mod)](https://github.com/hyperstarcloud/auto-mod/blob/main/LICENSE)
+[![npm version](https://badge.fury.io/js/auto-mod-discord.svg)](https://badge.fury.io/js/auto-mod-discord)
+[![GitHub issues](https://img.shields.io/github/issues/LabsStar/auto-mod-discord)](https://github.com/LabsStar/auto-mod-discord/issues)
+[![GitHub license](https://img.shields.io/github/license/LabsStar/auto-mod-discord)](https://github.com/LabsStar/auto-mod-discord/blob/main/LICENSE)
 
 # auto-mod-discord
 
